@@ -1,7 +1,5 @@
-import Konva from "konva";
 import './styles.scss'
-
-
+import Konva from "konva";
 
 var stage = new Konva.Stage({
   container: 'container',
@@ -44,7 +42,7 @@ for (let preset of presetsColors) {
     `
 }
 
-presets.innerHTML = buttons
+// presets.innerHTML = buttons
 
 const input = document.querySelector('input')
 input.innerHTML = ''
@@ -101,7 +99,7 @@ var lastEvent = false;
 stage.on('click tap', function(e) {
     // if click on empty area - remove all transformers
     if (e.target === stage && lastEvent !== e.evt) {
-        stage.find('Transformer').destroy();
+        // stage.find('Transformer').destroy();
         layer.draw();
         return;
     }
@@ -113,9 +111,18 @@ stage.on('click tap', function(e) {
  save.addEventListener('click',()=>{
 
   if (drags.length > 0){
-    drags[0].hide()
-    var dataURL = stage.toDataURL({ pixelRatio: 1 });
-    drags[0].show()
+    
+    for (let drag of drags){
+      drag.hide()
+    }
+    var dataURL = stage.toDataURL({ pixelRatio: 1 })
+
+
+    for (let drag of drags){
+      drag.show()
+    }
+
+   
     
   } else {
     
@@ -145,16 +152,33 @@ stage.on('click tap', function(e) {
   var textNode = new Konva.Text({
     x: 20,
     y: 60,
-    text: "COMPLEX TEXT\n\nAll the world's a stage, and all the men and women merely players. They have their exits and their entrances.",
+    text: "TEXTERINO",
     fontSize: 18,
     fontFamily: 'Calibri',
-    fill: '#555',
-    width: 300,
+    fontStyle:'bold',
+    fill: '#FFF',
+    // width: 300,
     padding: 20,
     align: 'center',
     draggable:true,
     edit:true,
   });
+
+  var Transformer = new Konva.Transformer({
+    nodes: [textNode],
+    keepRatio: true,
+    enabledAnchors: [
+      'top-left',
+      'top-right',
+      'bottom-left',
+      'bottom-right',
+    ],
+  });
+
+  drags.push(Transformer)
+  layer.add(Transformer);
+  layer.add(textNode)
+
 
 
   textNode.on('dblclick dbltap', () => {
@@ -222,15 +246,31 @@ stage.on('click tap', function(e) {
         textarea.style.left = areaPosition.x + 'px';
         textarea.style.width = textNode.width();
 
+
+        function check(e){
+          if (e.target !== textarea){
+
+            document.querySelector('textarea').remove()
+            // window.removeEventListener('click',check)
+          }
+        }
+
+
+
+        window.addEventListener('click',check)
+        
+        
+        
         textarea.focus();
 
         textarea.addEventListener('keydown', function (e) {
-          // hide on enter
-          if (e.keyCode === 13) {
-            textNode.text(textarea.value);
-            document.body.removeChild(textarea);
-          }
+          textNode.text(textarea.value);
         });
+
+
+
+
+
       });
 
 
@@ -245,5 +285,60 @@ stage.on('click tap', function(e) {
   stage.add(layerText);
 
 
+
+ })
+
+ const presetButtons = document.querySelectorAll('.preset')
+
+ let i = 1
+ presetButtons.forEach((button)=>{
+ 
+ 
+    button.addEventListener('click',()=>{
+
+      var url = `./images/presets/${i}.svg`;
+    i++
+      var img = new Image();
+      img.src = url;
+      img.onload = () => {
+        var img_width = img.width;
+        var img_height = img.height;
+    
+        // calculate dimensions to get max 300px
+        var max = 540;
+        var ratio = (img_width > img_height ? (img_width / max) : (img_height / max))
+    
+    
+        var theImg = new Konva.Image({
+          image: img,
+          x: 50,
+          y: 30,
+          width: img_width / ratio,
+          height: img_height / ratio,
+          draggable: true,
+        })
+    
+    
+        var tr1 = new Konva.Transformer({
+          nodes: [theImg],
+          keepRatio: true,
+          enabledAnchors: [
+            'top-left',
+            'top-right',
+            'bottom-left',
+            'bottom-right',
+          ],
+        });
+    
+        drags.push(tr1)
+        layer.add(tr1);
+        layer.add(theImg)
+    
+      }
+      })
+  
+  
+  
+  
 
  })
