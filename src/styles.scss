@@ -7,15 +7,25 @@
 
 
 body {
-  // background-color: $body-color;
+  background-color: #292929;
 }
 
 
 .wrapper{
+  margin:0 auto;
   max-width:1200px;
   display:flex;
   flex-direction:column;
   align-items: center;
+  
+  @media screen and (max-width:900px){
+    // background-color:red;  
+    width:98vw;
+  }
+
+  & >div {
+    border:1px solid red;
+  }
 
   #presets{
     display: flex;
@@ -30,14 +40,33 @@ body {
   }
 
   #editor{
+
     display: flex;
-    #container{
-      border:1px solid black;
-      width:800px;
-      height: 445px;
+
+    @media screen and (max-width:900px){
+      width:100%;
+      flex-direction: column;
     }
 
+
+    #container{
+      // border:1px solid black;
+      // width:800px;
+      // height: 445px;
+      border: 1px solid black;
+     
+    }
+    .editor-controll{
+      display: flex;
+      flex-direction: column;
+      gap:5px;
+    }
+
+
   }
+
+  
+
 
 }
 
