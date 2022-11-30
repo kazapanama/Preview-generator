@@ -97,13 +97,13 @@ export function renderBG(n, layer) {
   }
 }
 
-export function renderText(layer) {
+export function renderText(layer,stage) {
   var textNode = new Konva.Text({
     x: 500,
     y: 200,
     text: "TEXTERINO",
     fontSize: 46,
-    fontFamily: 'Calibri',
+    fontFamily: 'RussoOne-Regular',
     fontStyle: 'bold',
     fill: '#FFF',
     // padding: 20,

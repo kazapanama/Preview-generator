@@ -1,0 +1,10 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.85">
+<g opacity="0.85">
+<rect x="0.5" y="0.5" width="99" height="99" rx="4.5" stroke="white"/>
+</g>
+<rect x="13" y="10" width="5" height="15" fill="white"/>
+<rect x="23" y="15" width="5" height="15" transform="rotate(90 23 15)" fill="white"/>
+<path d="M29.7273 37.6364V27.4545H70.1818V37.6364H56.1818V74H43.7273V37.6364H29.7273Z" fill="white"/>
+</g>
+</svg>

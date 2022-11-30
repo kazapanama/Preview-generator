@@ -10,24 +10,39 @@
     
     <div class="wrapper">
         <div id="presets">
-            <img src="./images/icons/preset-icon1.svg" class="preset" data-preset="1">
-            <img src="./images/icons/preset-icon2.svg" class="preset" data-preset="2">
-            <img src="./images/icons/preset-icon3.svg" class="preset" data-preset="3">
-            <img src="./images/icons/preset-icon4.svg" class="preset" data-preset="4">
-            <img src="./images/icons/preset-icon5.svg" class="preset" data-preset="5">
-            <img src="./images/icons/preset-icon6.svg" class="preset" data-preset="6">
+            <button data-preset="1" class="preset-btn"> <img src="./images/icons/preset-icon1.svg" class="preset-img" alt="preset 1"></button>
+            <button data-preset="2" class="preset-btn"> <img src="./images/icons/preset-icon2.svg" class="preset-img" alt="preset 2"></button>
+            <button data-preset="3" class="preset-btn"> <img src="./images/icons/preset-icon3.svg" class="preset-img" alt="preset 3"></button>
+            <button data-preset="4" class="preset-btn"> <img src="./images/icons/preset-icon4.svg" class="preset-img" alt="preset 4"></button>
+            <button data-preset="5" class="preset-btn"> <img src="./images/icons/preset-icon5.svg" class="preset-img" alt="preset 5"></button>
+           
+        
+
             
         </div>
         
-
         <div id="editor">
             <div id="container" ></div>
             <div class="editor-controll">
-                <input type="file" accept="image/*">
-                <button class="save">save</button>
-                <button class="addText">add text</button>
-                <button class="reset">RESET</button>
-                <button class="test">TEST</button>
+                <button class="controll-input">
+                    <input type="file" accept="image/*" >
+                    <!-- <span>Додати зображення</span> -->
+                </button>
+                
+                <div>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-thin.svg"></button>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-regular.svg"></button>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-bold.svg"></button>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-thin-bg.svg"></button>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-regular-bg.svg"></button>
+                    <button class="addText controll-btn"><img src="./images/icons/text/text-bold-bg.svg"></button>
+
+                </div>
+                <div>
+                    <button class="reset controll-btn"><img src="./images/icons/icon-reset.svg" alt="reset icon"></button>
+                    <button class="save controll-btn"><img src="./images/icons/icon-save.svg" alt="save icon"></button>
+                </div>
+            
             </div>
 
         </div>
