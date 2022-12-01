@@ -39,3 +39,20 @@ export function saveAsPng(stage) {
     link.click();
     document.body.removeChild(link);
 }
+
+export function clearFullStage (stage){
+    stage.destroyChildren()
+}
+
+export function clearStageWithoutImage(stage){
+    let textNodes = stage.find('.textLayer')
+
+    for (let text of textNodes) {
+        text.destroy()
+    }
+
+    let bgLayer = stage.find('.bgLayer')
+        for (let bg of bgLayer){
+            bg.destroy()
+        }
+}

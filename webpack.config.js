@@ -1,26 +1,33 @@
 const path  = require('path')
 
 module.exports = {
-    entry:'./src/index.js',
+    entry:[
+      __dirname + '/src/index.js',
+      __dirname + '/src/styles.scss'
+  ],
     output:{
         filename:'index.js',
         path:path.resolve(__dirname,'public')
     },
     mode: 'development',
     module: {
-        rules: [
-          {
-            test: /\.s[ac]ss$/i,
+      rules: [
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: [],
+        }, {
+            test: /\.scss$/,
+            exclude: /node_modules/,
             use: [
-
-              "style-loader",
-
-              "css-loader",
-
-              "sass-loader",
-            ],
-          },
-        ],
+                {
+                    loader: 'file-loader',
+                    options: {  name: '[name].min.css'}
+                },
+                'sass-loader'
+            ]
+        }
+    ]
       },
 
       devServer: {

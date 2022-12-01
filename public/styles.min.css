@@ -1,0 +1,106 @@
+@font-face {
+  font-family: RussoOne-Regular;
+  src: url(../public/font/RussoOne-Regular.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #292929;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 900px) {
+  .wrapper {
+    width: 98vw;
+  }
+}
+.wrapper #presets {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgba(66, 66, 66, 0.8);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.wrapper #presets::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+@media screen and (max-width: 900px) {
+  .wrapper #presets {
+    justify-content: start;
+  }
+}
+.wrapper #presets .preset-btn {
+  cursor: pointer;
+  border: none;
+  background-color: rgba(66, 66, 66, 0);
+}
+.wrapper #presets .preset-btn:hover {
+  transition: all 0.3s ease;
+  transform: translateY(-5px);
+}
+.wrapper #presets .preset-btn .preset-img {
+  border: none;
+}
+.wrapper #editor {
+  display: flex;
+  gap: 15px;
+}
+@media screen and (max-width: 900px) {
+  .wrapper #editor {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+.wrapper #editor #container {
+  border: 1px solid black;
+}
+.wrapper #editor .editor-controll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.wrapper #editor .editor-controll .controll-input {
+  background-color: #292929;
+  height: 40px;
+  border: 1px dashed #408FC7;
+  cursor: pointer;
+  position: relative;
+  background-image: url("../public/images/icons/icon-plus.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+}
+.wrapper #editor .editor-controll .controll-input input[type=file] {
+  color: transparent;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.wrapper #editor .editor-controll .controll-btn {
+  cursor: pointer;
+  border: none;
+  background-color: #292929;
+  color: rgba(255, 255, 255, 0.8);
+}
+.wrapper #editor .editor-controll .controll-btn img {
+  width: 60px;
+  height: 60px;
+}

@@ -1,21 +1,17 @@
 export function setupStage() {
   
-  //w=800,h=445
   return new Konva.Stage({
     container: 'container',
     width: 800,
     height: 445,
   });
-
-  
-
-
-
 }
 
 
 export function renderImage(e, stage) {
-  var layer = new Konva.Layer();
+  const layer = new Konva.Layer({
+    name:'imageLayer'
+  });
   stage.add(layer);
 
   var url = URL.createObjectURL(e.target.files[0]);
@@ -62,14 +58,13 @@ export function renderImage(e, stage) {
 
 
 export function renderBG(n, layer) {
-  var url = `./images/presets/${n}.svg`;
+  const url = `./images/presets/${n}.svg`;
 
-  var img = new Image();
+  const img = new Image();
   img.src = url;
   img.onload = () => {
 
-
-    var theImg = new Konva.Image({
+    const theImg = new Konva.Image({
       image: img,
       x: 400,
       y: 0,
@@ -77,9 +72,9 @@ export function renderBG(n, layer) {
       height: 455,
       draggable: true,
     })
+    theImg.fillLinearGradientColorStops([0, 'green', 1, 'yellow']);
 
-
-    var tr1 = new Konva.Transformer({
+    const tr1 = new Konva.Transformer({
       name: 'tr',
       nodes: [theImg],
       keepRatio: true,
@@ -91,11 +86,11 @@ export function renderBG(n, layer) {
       ],
     });
 
-    //   drags.push(tr1)
     layer.add(tr1);
     layer.add(theImg)
   }
 }
+
 
 export function renderText(layer,stage) {
   var textNode = new Konva.Text({
@@ -103,10 +98,8 @@ export function renderText(layer,stage) {
     y: 200,
     text: "TEXTERINO",
     fontSize: 46,
-    fontFamily: 'RussoOne-Regular',
-    fontStyle: 'bold',
+    fontFamily: 'RussoOne',
     fill: '#FFF',
-    // padding: 20,
     align: 'center',
     draggable: true,
     edit: true,
@@ -127,7 +120,7 @@ export function renderText(layer,stage) {
 
   layer.add(Transformer)
   layer.add(textNode)
-
+  layer.draw()
 
 
   textNode.on('dblclick dbltap', () => {
@@ -221,3 +214,140 @@ export function renderText(layer,stage) {
 
 }
 
+export function renderTextWithBg(layer,stage) {
+  var textNode = new Konva.Text({
+    x: 500,
+    y: 200,
+    text: "Text with bg",
+    fontSize: 46,
+    fontFamily: 'RussoOne',
+    fill: '#FFF',
+    align: 'center',
+    draggable: true,
+    edit: true,
+  });
+
+    const box = new Konva.Rect({
+        x: textNode.x(),
+        y: textNode.y(),
+        width: textNode.width(),
+        height: textNode.height(),
+        fill: stage.theme,
+        listening:true
+      });
+
+      var Transformer = new Konva.Transformer({
+        nodes: [textNode,box],
+        keepRatio: true,
+        enabledAnchors: [
+          'top-left',
+          'top-right',
+          'bottom-left',
+          'bottom-right',
+        ],
+        shouldOverdrawWholeArea:true,
+      });
+
+
+
+
+  layer.add(box);
+
+  layer.add(Transformer)
+  layer.add(textNode)
+
+
+
+
+  textNode.on('dblclick dbltap', () => {
+    // create textarea over canvas with absolute position
+
+    // first we need to find position for textarea
+    // how to find it?
+
+    // at first lets find position of text node relative to the stage:
+    var textPosition = textNode.getAbsolutePosition();
+
+    // then lets find position of stage container on the page:
+    var stageBox = stage.container().getBoundingClientRect();
+
+    // so position of textarea will be the sum of positions above:
+    var areaPosition = {
+      x: stageBox.left + textPosition.x,
+      y: stageBox.top + textPosition.y,
+    };
+
+    // create textarea and style it
+    var textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+
+    textarea.value = textNode.text();
+    textarea.style.position = 'absolute';
+    textarea.style.top = areaPosition.y + 'px';
+    textarea.style.left = areaPosition.x + 'px';
+    textarea.style.width = textNode.width();
+
+    textarea.focus();
+
+    textarea.addEventListener('keydown', function (e) {
+      // hide on enter
+      if (e.keyCode === 13) {
+        textNode.text(textarea.value);
+        document.body.removeChild(textarea);
+      }
+    });
+  }); textNode.on('dblclick dbltap', () => {
+    // create textarea over canvas with absolute position
+
+    // first we need to find position for textarea
+    // how to find it?
+
+    // at first lets find position of text node relative to the stage:
+    var textPosition = textNode.getAbsolutePosition();
+
+    // then lets find position of stage container on the page:
+    var stageBox = stage.container().getBoundingClientRect();
+
+    // so position of textarea will be the sum of positions above:
+    var areaPosition = {
+      x: stageBox.left + textPosition.x,
+      y: stageBox.top + textPosition.y,
+    };
+
+    // create textarea and style it
+    var textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+
+    textarea.value = textNode.text();
+    textarea.style.position = 'absolute';
+    textarea.style.top = areaPosition.y + 'px';
+    textarea.style.left = areaPosition.x + 'px';
+    textarea.style.width = textNode.width();
+
+
+    function check(e) {
+      if (e.target !== textarea) {
+
+        document.querySelector('textarea').remove()
+        // window.removeEventListener('click',check)
+      }
+    }
+
+
+
+    window.addEventListener('click', check)
+
+
+
+    
+    textarea.addEventListener('keydown', function (e) {
+      textNode.text(textarea.value)
+      box.width(textNode.width())
+      box.height(textNode.height())
+    });
+    textarea.focus();
+  });
+
+
+
+}

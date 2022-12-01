@@ -1,5 +1,5 @@
 import { renderBG,renderText } from "./singleElements";
-
+import { clearStageWithoutImage } from "./controlls";
 // function createBox (layer) {
 //     const box = new Konva.Rect({
 //         x: 50,
@@ -15,12 +15,17 @@ import { renderBG,renderText } from "./singleElements";
 // }
 
 export function createPreset1 (stage) {
-  stage.destroyChildren()
-  const bgLayer = new Konva.Layer();
+  
+  clearStageWithoutImage(stage)
+  const bgLayer = new Konva.Layer({
+    name:'bgLayer'
+  });
   renderBG(1,bgLayer)
   stage.add(bgLayer)
 
-  const textLayer = new Konva.Layer()
+  const textLayer = new Konva.Layer({
+    name:'textLayer'
+  })
   renderText(textLayer,stage)
   stage.add(textLayer)
 
@@ -28,13 +33,18 @@ export function createPreset1 (stage) {
 }
 
 export function createPreset2 (stage) {
-  stage.destroyChildren()
-  const bgLayer = new Konva.Layer();
+  clearStageWithoutImage(stage)
+  
+  const bgLayer = new Konva.Layer({
+    name:'bgLayer'
+  });
   stage.add(bgLayer)
   renderBG(2,bgLayer)
 
 
-  const textLayer = new Konva.Layer()
+  const textLayer = new Konva.Layer({
+    name:'textLayer'
+  })
   renderText(textLayer,stage)
   stage.add(textLayer)
 
@@ -43,36 +53,46 @@ export function createPreset2 (stage) {
 }
 
 export function createPreset3 (stage) {
-  stage.destroyChildren()
-  const bgLayer = new Konva.Layer();
+  clearStageWithoutImage(stage)
+  
+  const bgLayer = new Konva.Layer({
+    name:'bgLayer'
+  });
   stage.add(bgLayer)
   renderBG(3,bgLayer)
 
 
-  const textLayer = new Konva.Layer()
+  const textLayer = new Konva.Layer({
+  name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
 }
 
 export function createPreset4 (stage) {
-  stage.destroyChildren()
-  const bgLayer = new Konva.Layer();
+  clearStageWithoutImage(stage)
+  const bgLayer = new Konva.Layer({
+    name:'bgLayer'
+  });
   stage.add(bgLayer)
   renderBG(4,bgLayer)
 
 
-  const textLayer = new Konva.Layer()
+  const textLayer = new Konva.Layer({
+  name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
 }
 
 export function createPreset5 (stage) {
-  stage.destroyChildren()
-  const bgLayer = new Konva.Layer();
+  clearStageWithoutImage(stage)
+  const bgLayer = new Konva.Layer({
+    name:'bgLayer'
+  });
   stage.add(bgLayer)
   renderBG(5,bgLayer)
 
-  const textLayer = new Konva.Layer()
+  const textLayer = new Konva.Layer({
+  name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
 }
