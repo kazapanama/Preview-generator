@@ -85,6 +85,35 @@ body {
       align-items: center;
       gap: 15px;
 
+      .themes{
+        display: flex;
+        justify-content: center;
+        gap:5px;
+        .theme{
+          width:40px;
+          height: 40px;
+          border:none;
+          border-radius: 10%;
+        }
+        .theme-blue{
+          background-color:blue;
+        }
+
+        .theme-red{
+          background-color:red;
+        }
+
+        .theme-green{
+          background-color:green;
+        }
+
+        .theme-yellow{
+          background-color:yellow;
+        }
+      }
+
+
+
       .editor-text{
         width:100%;
         textarea{
@@ -95,6 +124,8 @@ body {
           font-size:1.5em;
         }
       }
+      
+      
       
 
       .controll-input {

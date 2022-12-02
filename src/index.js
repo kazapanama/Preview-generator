@@ -2,7 +2,7 @@
 import Konva from "konva";
 import { createPreset1, createPreset2, createPreset3, createPreset4, createPreset5 } from './presets';
 import { setupStage, renderImage,renderText,renderTextWithBg } from './singleElements';
-import { fitStageIntoParentContainer,saveAsPng,clearFullStage,clearStageWithoutImage } from './controlls';
+import { fitStageIntoParentContainer,saveAsPng,clearFullStage,recolorElements, } from './controlls';
 
 
 
@@ -10,6 +10,8 @@ const stage = setupStage()
 
 // for future color manipulations
 stage.theme = '#46A8EF'
+
+
 
 fitStageIntoParentContainer(stage);
 window.addEventListener('resize',()=> fitStageIntoParentContainer(stage));
@@ -52,18 +54,35 @@ document.querySelector('[data-preset="3"]').addEventListener('click', () => crea
 document.querySelector('[data-preset="4"]').addEventListener('click', () => createPreset4(stage))
 document.querySelector('[data-preset="5"]').addEventListener('click', () => createPreset5(stage))
 
+document.querySelector('.theme-blue').addEventListener('click', () => {
+  stage.theme = 'blue'
+  recolorElements(stage)
+})
+
+document.querySelector('.theme-red').addEventListener('click', () => {
+  stage.theme = 'red'
+  recolorElements(stage)
+})
+
+document.querySelector('.theme-green').addEventListener('click', () => {
+  stage.theme = 'green'
+  recolorElements(stage)
+})
+
+document.querySelector('.theme-yellow').addEventListener('click', () => {
+  stage.theme = 'yellow'
+  recolorElements(stage)
+})
+
+
+
+
 
 
 document.querySelector('.reset').addEventListener('click', () => clearFullStage(stage))
 document.querySelector('.test').addEventListener('click', () => {
   stage.theme = 'red';
-
- const rects  = stage.find('Rect')
-
-  for (let rect of rects){
-    rect.fill(stage.theme)
-  }
-
+  recolorElements(stage)
 })
 
 

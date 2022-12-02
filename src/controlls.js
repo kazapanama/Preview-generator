@@ -71,3 +71,29 @@ export function rearrangeStage(stage){
         img.zIndex(0)
     }
 }
+
+export function recolorElements(stage){
+
+ const color = stage.theme
+ const rects  = stage.find('Rect')
+
+ for (let rect of rects){
+   rect.fill(color)
+ }
+
+ const circles  = stage.find('Circle')
+
+ for (let rect of circles){
+   rect.fill(color)
+ }
+
+ const paths  = stage.find('Path')
+
+ for (let rect of paths){
+   rect.fill(color)
+ }
+
+    document.querySelectorAll('path').forEach(path=>path.style.fill = color);
+    document.querySelectorAll('rect').forEach(path=>path.style.stroke = color);
+    document.querySelector('.controll-input').style.borderColor = color;
+}

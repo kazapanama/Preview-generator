@@ -77,6 +77,29 @@ body {
   align-items: center;
   gap: 15px;
 }
+.wrapper #editor .editor-controll .themes {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.wrapper #editor .editor-controll .themes .theme {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10%;
+}
+.wrapper #editor .editor-controll .themes .theme-blue {
+  background-color: blue;
+}
+.wrapper #editor .editor-controll .themes .theme-red {
+  background-color: red;
+}
+.wrapper #editor .editor-controll .themes .theme-green {
+  background-color: green;
+}
+.wrapper #editor .editor-controll .themes .theme-yellow {
+  background-color: yellow;
+}
 .wrapper #editor .editor-controll .editor-text {
   width: 100%;
 }
