@@ -55,6 +55,16 @@ document.querySelector('[data-preset="5"]').addEventListener('click', () => crea
 
 
 document.querySelector('.reset').addEventListener('click', () => clearFullStage(stage))
+document.querySelector('.test').addEventListener('click', () => {
+  stage.theme = 'red';
+
+ const rects  = stage.find('Rect')
+
+  for (let rect of rects){
+    rect.fill(stage.theme)
+  }
+
+})
 
 
 
