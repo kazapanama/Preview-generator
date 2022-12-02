@@ -7,7 +7,9 @@ import { fitStageIntoParentContainer,saveAsPng,clearFullStage,clearStageWithoutI
 
 
 const stage = setupStage()
-stage.theme = 'red'
+
+// for future color manipulations
+stage.theme = '#46A8EF'
 
 fitStageIntoParentContainer(stage);
 window.addEventListener('resize',()=> fitStageIntoParentContainer(stage));

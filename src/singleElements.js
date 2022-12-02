@@ -47,6 +47,18 @@ export function renderImage(e, stage) {
       ],
     });
 
+
+    theImg.addEventListener('wheel',(e)=>{
+      
+      let scale = -e.deltaY*0.001
+      // let width = theImg.width()*(scale-1)
+      // let height = theImg.height()*(scale-1)
+      
+      const {x,y} = theImg.scale()
+      console.log(theImg.scale({x:x+scale,y:y+scale}))
+    })
+
+
     layer.zIndex(0)
     layer.add(tr1);
     layer.add(theImg)
