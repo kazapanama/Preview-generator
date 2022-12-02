@@ -14,31 +14,19 @@ window.addEventListener('resize',()=> fitStageIntoParentContainer(stage));
 
 
 
-document.querySelector('input').addEventListener('change', (e) => {
+document.querySelector('input[type=file]').addEventListener('change', (e) => {
   renderImage(e, stage)
 })
 
-
-
-
-
-
-
-// stage.on('click tap', function (e) {
-//   // if click on empty area - remove all transformers
-//   if (e.target === stage && lastEvent !== e.evt) {
-//     // stage.find('Transformer').destroy();
-//     layer.draw();
-//     return;
-//   }
-// })
 
 
 document.querySelector('.save').addEventListener('click', () => saveAsPng(stage))
 
 
 document.querySelector('.addText').addEventListener('click', () => {
-  const textLayer = new Konva.Layer();
+  const textLayer = new Konva.Layer({
+    name:'customText'
+  });
   stage.add(textLayer);
   renderText(textLayer,stage)
 })
@@ -47,13 +35,11 @@ document.querySelector('.addText').addEventListener('click', () => {
 document.querySelector('.addTextWithBg').addEventListener('click', () => {
 
   const textLayer = new Konva.Layer({
-    name:'test'
+    name:'customText'
   });
   stage.add(textLayer);
   renderTextWithBg(textLayer,stage)
 })
-
-
 
 
 
@@ -70,10 +56,6 @@ document.querySelector('.reset').addEventListener('click', () => clearFullStage(
 
 
 
-// document.querySelector('.test').addEventListener('click', () => {
-//   console.log(stage.find('.textLayer')[0].removeChildren())
-// })
-
+// initial render and deleting to fix font bug
 createPreset1(stage)
-// let a = document.querySelector('[data-preset="1"]')
 clearFullStage(stage)

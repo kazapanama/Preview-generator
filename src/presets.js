@@ -1,5 +1,5 @@
 import { renderBG,renderText } from "./singleElements";
-import { clearStageWithoutImage } from "./controlls";
+import { clearPreset,rearrangeStage } from "./controlls";
 // function createBox (layer) {
 //     const box = new Konva.Rect({
 //         x: 50,
@@ -16,7 +16,8 @@ import { clearStageWithoutImage } from "./controlls";
 
 export function createPreset1 (stage) {
   
-  clearStageWithoutImage(stage)
+  
+  clearPreset(stage)
   const bgLayer = new Konva.Layer({
     name:'bgLayer'
   });
@@ -29,11 +30,11 @@ export function createPreset1 (stage) {
   renderText(textLayer,stage)
   stage.add(textLayer)
 
-
+  rearrangeStage(stage)
 }
 
 export function createPreset2 (stage) {
-  clearStageWithoutImage(stage)
+  clearPreset(stage)
   
   const bgLayer = new Konva.Layer({
     name:'bgLayer'
@@ -48,12 +49,12 @@ export function createPreset2 (stage) {
   renderText(textLayer,stage)
   stage.add(textLayer)
 
-
+  rearrangeStage(stage)
 
 }
 
 export function createPreset3 (stage) {
-  clearStageWithoutImage(stage)
+  clearPreset(stage)
   
   const bgLayer = new Konva.Layer({
     name:'bgLayer'
@@ -66,10 +67,11 @@ export function createPreset3 (stage) {
   name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
+  rearrangeStage(stage)
 }
 
 export function createPreset4 (stage) {
-  clearStageWithoutImage(stage)
+  clearPreset(stage)
   const bgLayer = new Konva.Layer({
     name:'bgLayer'
   });
@@ -81,10 +83,11 @@ export function createPreset4 (stage) {
   name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
+  rearrangeStage(stage)
 }
 
 export function createPreset5 (stage) {
-  clearStageWithoutImage(stage)
+  clearPreset(stage)
   const bgLayer = new Konva.Layer({
     name:'bgLayer'
   });
@@ -95,5 +98,6 @@ export function createPreset5 (stage) {
   name:'textLayer'})
   renderText(textLayer,stage)
   stage.add(textLayer)
+  rearrangeStage(stage)
 }
 

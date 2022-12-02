@@ -51,7 +51,7 @@ export function renderImage(e, stage) {
     layer.add(tr1);
     layer.add(theImg)
   }
-
+  
 
 }
 
@@ -123,92 +123,42 @@ export function renderText(layer,stage) {
   layer.draw()
 
 
+  const editDiv = document.querySelector('.editor-text')
+  
+  
+  let textarea 
+
+
+
+
   textNode.on('dblclick dbltap', () => {
-    // create textarea over canvas with absolute position
+    textarea = document.createElement('textarea')
+    editDiv.appendChild(textarea)
+    textarea.innerText = textNode.text()
 
-    // first we need to find position for textarea
-    // how to find it?
+    const end = textarea.value.length;
+    textarea.setSelectionRange(end, end);
 
-    // at first lets find position of text node relative to the stage:
-    var textPosition = textNode.getAbsolutePosition();
-
-    // then lets find position of stage container on the page:
-    var stageBox = stage.container().getBoundingClientRect();
-
-    // so position of textarea will be the sum of positions above:
-    var areaPosition = {
-      x: stageBox.left + textPosition.x,
-      y: stageBox.top + textPosition.y,
-    };
-
-    // create textarea and style it
-    var textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-
-    textarea.value = textNode.text();
-    textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-    textarea.style.width = textNode.width();
-
-    textarea.focus();
-
-    textarea.addEventListener('keydown', function (e) {
-      // hide on enter
-      if (e.keyCode === 13) {
-        textNode.text(textarea.value);
-        document.body.removeChild(textarea);
-      }
-    });
-  }); textNode.on('dblclick dbltap', () => {
-    // create textarea over canvas with absolute position
-
-    // first we need to find position for textarea
-    // how to find it?
-
-    // at first lets find position of text node relative to the stage:
-    var textPosition = textNode.getAbsolutePosition();
-
-    // then lets find position of stage container on the page:
-    var stageBox = stage.container().getBoundingClientRect();
-
-    // so position of textarea will be the sum of positions above:
-    var areaPosition = {
-      x: stageBox.left + textPosition.x,
-      y: stageBox.top + textPosition.y,
-    };
-
-    // create textarea and style it
-    var textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-
-    textarea.value = textNode.text();
-    textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-    textarea.style.width = textNode.width();
+    textarea.focus()
 
 
-    function check(e) {
-      if (e.target !== textarea) {
-
-        document.querySelector('textarea').remove()
-        // window.removeEventListener('click',check)
-      }
-    }
+    textarea.addEventListener('input',(e)=>{
+      textNode.text(e.target.value)
+    })
+  
+    textarea.addEventListener('blur',(e)=>{
+      textarea.value = ''
+      textarea.disabled = true
+      textarea.remove()
+    })
 
 
 
-    window.addEventListener('click', check)
 
 
+})
 
-    textarea.focus();
-
-    textarea.addEventListener('keydown', function (e) {
-      textNode.text(textarea.value);
-    });
-  });
+  
 
 
 
@@ -228,10 +178,10 @@ export function renderTextWithBg(layer,stage) {
   });
 
     const box = new Konva.Rect({
-        x: textNode.x(),
-        y: textNode.y(),
-        width: textNode.width(),
-        height: textNode.height(),
+        x: textNode.x()-5,
+        y: textNode.y()-5,
+        width: textNode.width()+10,
+        height: textNode.height()+10,
         fill: stage.theme,
         listening:true
       });
@@ -259,95 +209,37 @@ export function renderTextWithBg(layer,stage) {
 
 
 
+  const editDiv = document.querySelector('.editor-text')
+  
+  
+  let textarea 
+
+
+
+
   textNode.on('dblclick dbltap', () => {
-    // create textarea over canvas with absolute position
+    textarea = document.createElement('textarea')
+    editDiv.appendChild(textarea)
+    textarea.innerText = textNode.text()
 
-    // first we need to find position for textarea
-    // how to find it?
+    const end = textarea.value.length;
+    textarea.setSelectionRange(end, end);
 
-    // at first lets find position of text node relative to the stage:
-    var textPosition = textNode.getAbsolutePosition();
-
-    // then lets find position of stage container on the page:
-    var stageBox = stage.container().getBoundingClientRect();
-
-    // so position of textarea will be the sum of positions above:
-    var areaPosition = {
-      x: stageBox.left + textPosition.x,
-      y: stageBox.top + textPosition.y,
-    };
-
-    // create textarea and style it
-    var textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-
-    textarea.value = textNode.text();
-    textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-    textarea.style.width = textNode.width();
-
-    textarea.focus();
-
-    textarea.addEventListener('keydown', function (e) {
-      // hide on enter
-      if (e.keyCode === 13) {
-        textNode.text(textarea.value);
-        document.body.removeChild(textarea);
-      }
-    });
-  }); textNode.on('dblclick dbltap', () => {
-    // create textarea over canvas with absolute position
-
-    // first we need to find position for textarea
-    // how to find it?
-
-    // at first lets find position of text node relative to the stage:
-    var textPosition = textNode.getAbsolutePosition();
-
-    // then lets find position of stage container on the page:
-    var stageBox = stage.container().getBoundingClientRect();
-
-    // so position of textarea will be the sum of positions above:
-    var areaPosition = {
-      x: stageBox.left + textPosition.x,
-      y: stageBox.top + textPosition.y,
-    };
-
-    // create textarea and style it
-    var textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-
-    textarea.value = textNode.text();
-    textarea.style.position = 'absolute';
-    textarea.style.top = areaPosition.y + 'px';
-    textarea.style.left = areaPosition.x + 'px';
-    textarea.style.width = textNode.width();
+    textarea.focus()
 
 
-    function check(e) {
-      if (e.target !== textarea) {
-
-        document.querySelector('textarea').remove()
-        // window.removeEventListener('click',check)
-      }
-    }
-
-
-
-    window.addEventListener('click', check)
-
-
-
-    
-    textarea.addEventListener('keydown', function (e) {
-      textNode.text(textarea.value)
-      box.width(textNode.width())
-      box.height(textNode.height())
-    });
-    textarea.focus();
-  });
+    textarea.addEventListener('input',(e)=>{
+      textNode.text(e.target.value)
+      box.width(textNode.width()+10)
+      box.height(textNode.height()+10)
+    })
+  
+    textarea.addEventListener('blur',(e)=>{
+      textarea.value = ''
+      textarea.disabled = true
+      textarea.remove()
+    })
 
 
-
+  })
 }

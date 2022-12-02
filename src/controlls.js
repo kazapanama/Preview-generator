@@ -44,7 +44,7 @@ export function clearFullStage (stage){
     stage.destroyChildren()
 }
 
-export function clearStageWithoutImage(stage){
+export function clearPreset(stage){
     let textNodes = stage.find('.textLayer')
 
     for (let text of textNodes) {
@@ -55,4 +55,19 @@ export function clearStageWithoutImage(stage){
         for (let bg of bgLayer){
             bg.destroy()
         }
+}
+
+export function rearrangeStage(stage){
+    const textLayers = stage.find('.textLayer')
+    for (let text of textLayers){
+        text.zIndex(0)
+    }
+
+    const bgLayer = stage.find('.bgLayer')
+    bgLayer[0].zIndex(0)
+
+    const imgLayer = stage.find('.imageLayer')
+    for(let img of imgLayer){
+        img.zIndex(0)
+    }
 }
