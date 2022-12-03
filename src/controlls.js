@@ -1,99 +1,92 @@
 export function fitStageIntoParentContainer(stage) {
-    const container = document.querySelector('#editor');
+  const container = document.querySelector('#editor');
 
-    if (container.offsetWidth < 800) {
-        const sceneWidth = 800;
-        const sceneHeight = 445;
-        const scale = container.offsetWidth / sceneWidth;
+  if (container.offsetWidth < 800) {
+    const sceneWidth = 800;
+    const sceneHeight = 445;
+    const scale = container.offsetWidth / sceneWidth;
 
-        stage.width(sceneWidth * scale);
-        stage.height(sceneHeight * scale);
-        stage.scale({ x: scale, y: scale });
-    }
+    stage.width(sceneWidth * scale);
+    stage.height(sceneHeight * scale);
+    stage.scale({ x: scale, y: scale });
+  }
 }
-
 
 export function saveAsPng(stage) {
-    const transformers = stage.find('Transformer')
+  const transformers = stage.find('Transformer');
 
-    for (const transformer of transformers) {
-        transformer.hide()
-    }
-    const oldSize = stage.size();
+  for (const transformer of transformers) {
+    transformer.hide();
+  }
+  const oldSize = stage.size();
 
+  let VIRTUAL_WIDTH = 800;
+  const pixelRatio = VIRTUAL_WIDTH / stage.width();
+  const dataURL = stage.toDataURL({ pixelRatio });
 
-    let VIRTUAL_WIDTH = 800
-    const pixelRatio = VIRTUAL_WIDTH / stage.width();
-    const dataURL = stage.toDataURL({ pixelRatio });
+  stage.size(oldSize);
 
-    stage.size(oldSize);
+  for (let transformer of transformers) {
+    transformer.show();
+  }
 
-    for (let transformer of transformers) {
-        transformer.show()
-    }
-
-    const link = document.createElement('a');
-    link.download = `${Date.now()}.png`
-    link.href = dataURL;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const link = document.createElement('a');
+  link.download = `${Date.now()}.png`;
+  link.href = dataURL;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
-export function clearFullStage (stage){
-    stage.destroyChildren()
+export function clearFullStage(stage) {
+  stage.destroyChildren();
 }
 
-export function clearPreset(stage){
-    let textNodes = stage.find('.textLayer')
+export function clearPreset(stage) {
+  let textNodes = stage.find('.textLayer');
 
-    for (let text of textNodes) {
-        text.destroy()
-    }
+  for (let text of textNodes) {
+    text.destroy();
+  }
 
-    let bgLayer = stage.find('.bgLayer')
-        for (let bg of bgLayer){
-            bg.destroy()
-        }
+  let bgLayer = stage.find('.bgLayer');
+  for (let bg of bgLayer) {
+    bg.destroy();
+  }
 }
 
-export function rearrangeStage(stage){
-    const textLayers = stage.find('.textLayer')
-    for (let text of textLayers){
-        text.zIndex(0)
-    }
+export function rearrangeStage(stage) {
+  const textLayers = stage.find('.textLayer');
+  for (let text of textLayers) {
+    text.zIndex(0);
+  }
 
-    const bgLayer = stage.find('.bgLayer')
-    bgLayer[0].zIndex(0)
+  const bgLayer = stage.find('.bgLayer');
+  bgLayer[0].zIndex(0);
 
-    const imgLayer = stage.find('.imageLayer')
-    for(let img of imgLayer){
-        img.zIndex(0)
-    }
+  const imgLayer = stage.find('.imageLayer');
+  for (let img of imgLayer) {
+    img.zIndex(0);
+  }
 }
 
-export function recolorElements(stage){
-//NEED TO REFACTOR
- const color = stage.theme
- const rects  = stage.find('Rect')
+export function recolorElements(stage) {
+  const color = stage.theme;
+  const changeElems = [
+    ...stage.find('Rect'),
+    ...stage.find('Circle'),
+    ...stage.find('Path'),
+  ];
 
- for (let rect of rects){
-   rect.fill(color)
- }
+  for (let element of changeElems) {
+    element.fill(color);
+  }
 
- const circles  = stage.find('Circle')
-
- for (let rect of circles){
-   rect.fill(color)
- }
-
- const paths  = stage.find('Path')
-
- for (let rect of paths){
-   rect.fill(color)
- }
-
-    document.querySelectorAll('path').forEach(path=>path.style.fill = color);
-    document.querySelectorAll('rect').forEach(path=>path.style.stroke = color);
-    document.querySelector('.controll-input').style.borderColor = color;
+  document
+    .querySelectorAll('path')
+    .forEach((path) => (path.style.fill = color));
+  document
+    .querySelectorAll('rect')
+    .forEach((path) => (path.style.stroke = color));
+  document.querySelector('.controll-input').style.borderColor = color;
 }
