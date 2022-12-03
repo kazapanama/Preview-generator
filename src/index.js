@@ -5,7 +5,7 @@ import { setupStage, renderImage,renderText,renderTextWithBg } from './singleEle
 import { fitStageIntoParentContainer,saveAsPng,clearFullStage,recolorElements, } from './controlls';
 
 
-
+Konva.hitOnDragEnabled = true;
 const stage = setupStage()
 
 // for future color manipulations
@@ -54,6 +54,8 @@ document.querySelector('[data-preset="3"]').addEventListener('click', () => crea
 document.querySelector('[data-preset="4"]').addEventListener('click', () => createPreset4(stage))
 document.querySelector('[data-preset="5"]').addEventListener('click', () => createPreset5(stage))
 
+
+//DUMMY COLORS FOR NOW<
 document.querySelector('.theme-blue').addEventListener('click', () => {
   stage.theme = 'blue'
   recolorElements(stage)

@@ -73,7 +73,7 @@ export function rearrangeStage(stage){
 }
 
 export function recolorElements(stage){
-
+//NEED TO REFACTOR
  const color = stage.theme
  const rects  = stage.find('Rect')
 

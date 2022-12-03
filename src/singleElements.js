@@ -13,7 +13,6 @@ export function renderImage(e, stage) {
     name:'imageLayer'
   });
   stage.add(layer);
-
   var url = URL.createObjectURL(e.target.files[0]);
   var img = new Image();
   img.src = url;
@@ -49,59 +48,72 @@ export function renderImage(e, stage) {
 
 
     theImg.addEventListener('wheel',(e)=>{
-      
       let scale = -e.deltaY*0.001
       const {x,y} = theImg.scale()
       console.log(theImg.scale({x:x+scale,y:y+scale}))
     })
 
 
+var lastDist = 0;
+
+function getDistance(p1, p2) {
+  return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+}
+
+
+
+theImg.addEventListener(
+  'touchmove',
+  function (evt) {
+    var touch1 = evt.touches[0];
+    var touch2 = evt.touches[1];
+
+    if (touch1 && touch2 ) {
+      var dist = getDistance(
+        {
+          x: touch1.clientX,
+          y: touch1.clientY,
+        },
+        {
+          x: touch2.clientX,
+          y: touch2.clientY,
+        }
+      );
+
+      if (!lastDist) {
+        lastDist = dist;
+      }
+
+      var scale = (theImg.scaleX() * dist) / lastDist;
+
+      theImg.scaleX(scale);
+      theImg.scaleY(scale);
+      lastDist = dist;
+    }
+  },
+  false
+);
+
+theImg.addEventListener(
+  'touchend',
+  function () {
+    lastDist = 0;
+  },
+  false
+);
+
+
     layer.zIndex(0)
     layer.add(tr1);
     layer.add(theImg)
   }
-  
 
 }
 
 
 
-export function renderBG(n, layer) {
-  const url = `./images/presets/${n}.svg`;
 
-  const img = new Image();
-  img.src = url;
-  img.onload = () => {
-
-    const theImg = new Konva.Image({
-      image: img,
-      x: 400,
-      y: 0,
-      width: 400,
-      height: 455,
-      draggable: true,
-    })
-    theImg.fillLinearGradientColorStops([0, 'green', 1, 'yellow']);
-
-    const tr1 = new Konva.Transformer({
-      name: 'tr',
-      nodes: [theImg],
-      keepRatio: true,
-      enabledAnchors: [
-        'top-left',
-        'top-right',
-        'bottom-left',
-        'bottom-right',
-      ],
-    });
-
-    layer.add(tr1);
-    layer.add(theImg)
-  }
-}
-
-
-export function renderText(layer,stage) {
+export function renderText(layer) {
   var textNode = new Konva.Text({
     x: 500,
     y: 200,
@@ -135,13 +147,10 @@ export function renderText(layer,stage) {
   const editDiv = document.querySelector('.editor-text')
   
   
-  let textarea 
-
-
 
 
   textNode.on('dblclick dbltap', () => {
-    textarea = document.createElement('textarea')
+   let textarea = document.createElement('textarea')
     editDiv.appendChild(textarea)
     textarea.innerText = textNode.text()
 
