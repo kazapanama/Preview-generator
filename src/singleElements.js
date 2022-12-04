@@ -40,6 +40,7 @@ export function renderImage(e, stage) {
     theImg.addEventListener('wheel', (e) => {
       let scale = -e.deltaY * 0.001;
       const { x, y } = theImg.scale();
+      theImg.scale({ x: x + scale, y: y + scale })
     });
 
     let lastDist = 0;
