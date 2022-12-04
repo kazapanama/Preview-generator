@@ -252,7 +252,6 @@ export function renderRectWithOpacity(layer,color,x,y,inverse=false) {
     width: 10,
     height: box.height(),
     cornerRadius:5,
-    opacity: 0.55,
     fill: color,
     draggable: false,
   });
