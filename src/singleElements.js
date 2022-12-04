@@ -40,7 +40,6 @@ export function renderImage(e, stage) {
     theImg.addEventListener('wheel', (e) => {
       let scale = -e.deltaY * 0.001;
       const { x, y } = theImg.scale();
-      console.log(theImg.scale({ x: x + scale, y: y + scale }));
     });
 
     let lastDist = 0;
@@ -95,14 +94,14 @@ export function renderImage(e, stage) {
   };
 }
 
-export function renderText(layer,x=270,y=200) {
+export function renderText(layer,x=270,y=200,inverse=false) {
   const textNode = new Konva.Text({
     x,
     y,
     text: 'Sample text',
     fontSize: 46,
     fontFamily: 'RussoOne',
-    fill: '#FFF',
+    fill: (inverse? '000': '#FFF'),
     shadowOffset: {x: 5, y: 5},
     shadowColor: '#292929',
     shadowBlur: 5,
@@ -146,14 +145,14 @@ export function renderText(layer,x=270,y=200) {
   });
 }
 
-export function renderTextWithBg(layer, color,x=270,y=200) {
+export function renderTextWithBg(layer,color,x=270,y=200,inverse=false) {
   const textNode = new Konva.Text({
     x,
     y,
     text: 'Sample text',
     fontSize: 46,
     fontFamily: 'RussoOne',
-    fill: '#FFF',
+    fill:  (inverse? '000': '#FFF'),
     align: 'center',
     shadowOffset: {x: 5, y: 5},
     shadowColor: '#292929',
@@ -162,6 +161,7 @@ export function renderTextWithBg(layer, color,x=270,y=200) {
     draggable: true,
     edit: true,
   });
+
 
   const box = new Konva.Rect({
     x: textNode.x() - 5,
@@ -213,40 +213,160 @@ export function renderTextWithBg(layer, color,x=270,y=200) {
   });
 }
 
-export function renderRectWithOpacity(layer,color,x,y){
-  const rect = new Konva.Rect({
+
+export function renderRectWithOpacity(layer,color,x,y,inverse=false) {
+  const textNode = new Konva.Text({
     x,
     y,
-    width: 400,
-    height: 100,
-    fill: '#000',
-    opacity: 0.5,
+    text: 'Sample text\nSample text',
+    fontSize: 46,
+    name:'dontRecolor',
+    fontFamily: 'RussoOne',
+    fill:  (inverse? '000': '#FFF'),
+    align: 'left',
+    shadowOffset: {x: 5, y: 5},
+    shadowColor: '#292929',
+    shadowBlur: 5,
+    shadowOpacity: 0.25,
     draggable: true,
+    edit: true,
+  });
+  
+  
+  const box = new Konva.Rect({
+    name:'dontRecolor',
+    x:x-5,
+    y:y-5,
+    width: textNode.width() + 10,
+    height: textNode.height() + 5,
+    fill: '#000',
+    opacity: 0.55,
+    cornerRadius:5,
+    draggable: false,
   });
 
   const tip = new Konva.Rect({
-    x:rect.x() - 10,
-    y:rect.y(),
+    x:box.x() - 10,
+    y:box.y(),
     width: 10,
-    height: 100,
+    height: box.height(),
+    cornerRadius:5,
+    opacity: 0.55,
     fill: color,
-    draggable: true,
+    draggable: false,
   });
 
-
-  const group = new Konva.Group({
-    draggable: true,
-  });
-
-  group.add(rect);
-  group.add(tip);
 
   const Transformer = new Konva.Transformer({
-    nodes: [group],
-    keepRatio: false,
+    nodes: [ box, tip,textNode,],
+    keepRatio: true,
     enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
   });
 
+  layer.add(box);
+  layer.add(textNode);
+  layer.add(tip);
   layer.add(Transformer);
-  layer.add(group);
+
+
+  const editDiv = document.querySelector('.editor-text');
+
+  let textarea;
+
+  textNode.on('dblclick dbltap', () => {
+    textarea = document.createElement('textarea');
+    editDiv.appendChild(textarea);
+    textarea.innerText = textNode.text();
+
+    const end = textarea.value.length;
+    textarea.setSelectionRange(end, end);
+
+    textarea.focus();
+
+    textarea.addEventListener('input', (e) => {
+      textNode.text(e.target.value);
+      box.width(textNode.width() + 10);
+      box.height(textNode.height() + 10);
+      tip.height(box.height())
+    });
+
+    textarea.addEventListener('blur', (e) => {
+      textarea.value = '';
+      textarea.disabled = true;
+      textarea.remove();
+    });
+  });
+
+
+
+}
+
+export function renderWhiteSmallText(layer,x=270,y=200) {
+  const textNode = new Konva.Text({
+    x,
+    y,
+    text: '5 Грудня',
+    fontSize: 20,
+    fontFamily: 'RussoOne',
+    fill: '#000',
+    align: 'center',
+    name:'dontRecolor',
+    shadowOffset: {x: 5, y: 5},
+    shadowColor: '#292929',
+    shadowBlur: 5,
+    shadowOpacity: 0.25,
+    draggable: true,
+    edit: true,
+  });
+
+
+  const box = new Konva.Rect({
+    x: textNode.x() - 5,
+    y: textNode.y() - 5,
+    name:'dontRecolor',
+    width: textNode.width() + 5,
+    height: textNode.height() + 5,
+    cornerRadius:5,
+    fill: '#FFF',
+    listening: true,
+  });
+
+  const Transformer = new Konva.Transformer({
+    nodes: [textNode, box],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+    shouldOverdrawWholeArea: true,
+  });
+
+  layer.add(box);
+
+  layer.add(Transformer);
+  layer.add(textNode);
+
+  const editDiv = document.querySelector('.editor-text');
+
+  let textarea;
+
+  textNode.on('dblclick dbltap', () => {
+    textarea = document.createElement('textarea');
+    editDiv.appendChild(textarea);
+    textarea.innerText = textNode.text();
+
+    const end = textarea.value.length;
+    textarea.setSelectionRange(end, end);
+
+    textarea.focus();
+
+    textarea.addEventListener('input', (e) => {
+      textNode.text(e.target.value);
+      box.width(textNode.width() + 10);
+      box.height(textNode.height() + 10);
+    });
+
+    textarea.addEventListener('blur', (e) => {
+      textarea.value = '';
+      textarea.disabled = true;
+      textarea.remove();
+    });
+  });
 }

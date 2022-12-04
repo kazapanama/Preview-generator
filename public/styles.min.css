@@ -29,7 +29,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  background-color: rgba(66, 66, 66, 0.8);
+  background-color: rgba(107, 107, 107, 0.8);
   padding: 10px 15px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -98,6 +98,9 @@ body {
 .wrapper #editor .editor-controll .themes .theme-blue {
   background-color: #46a8ef;
 }
+.wrapper #editor .editor-controll .themes .theme-dark-blue {
+  background-color: #1b0394;
+}
 .wrapper #editor .editor-controll .themes .theme-red {
   background-color: #780707;
 }
@@ -106,6 +109,12 @@ body {
 }
 .wrapper #editor .editor-controll .themes .theme-yellow {
   background-color: #feb920;
+}
+.wrapper #editor .editor-controll .themes .theme-grey {
+  background-color: #494949;
+}
+.wrapper #editor .editor-controll .themes .theme-white {
+  background-color: #fff;
 }
 .wrapper #editor .editor-controll #opacity-range {
   width: 80%;

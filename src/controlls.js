@@ -62,7 +62,7 @@ export function rearrangeStage(stage) {
   }
 
   const bgLayer = stage.find('.bgLayer');
-  bgLayer[0].zIndex(0);
+  bgLayer[0]?.zIndex(0);
 
   const imgLayer = stage.find('.imageLayer');
   for (let img of imgLayer) {
@@ -79,7 +79,10 @@ export function recolorElements(stage) {
   ];
 
   for (let element of changeElems) {
-    element.fill(color);
+    //do not recolor bg with opacity for text
+    if (element.name() !== 'dontRecolor') {
+      element.fill(color);
+    }
   }
 
   document
@@ -91,7 +94,8 @@ export function recolorElements(stage) {
   document.querySelector('.controll-input').style.borderColor = color;
 }
 
-export function resizeElements(stage,value){
+export function setElementsOpacity(stage,value){
+  
   const changeElems = [
     ...stage.find('Rect'),
     ...stage.find('Circle'),
@@ -100,8 +104,21 @@ export function resizeElements(stage,value){
 
 
   for (let layer of changeElems){
-    layer.opacity(value*0.01)
 
+    if(layer.name() !== 'dontRecolor'){
+    
+      layer.opacity(value*0.01)
+    }
   }
 
+}
+
+export function recolorText(stage) {
+  const textNodes = stage.find('Text');
+
+  for (let text of textNodes) {
+    if(text.name() !== 'dontRecolor'){
+      stage.inverse ? text.fill('#000'): text.fill('#fff');
+    }
+  }
 }

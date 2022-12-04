@@ -29,7 +29,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    background-color: rgba($color: #424242, $alpha: 0.8);
+    background-color: rgba($color: #6b6b6b, $alpha: 0.8);
     padding: 10px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -103,6 +103,10 @@ body {
           background-color: #46a8ef;
         }
 
+        .theme-dark-blue {
+          background-color: #1b0394;
+        }
+
         .theme-red {
           background-color: #780707;
         }
@@ -114,6 +118,14 @@ body {
         .theme-yellow {
           background-color: #feb920;
         }
+        .theme-grey {
+          background-color: #494949;
+        }
+
+        .theme-white {
+          background-color: #fff;
+        }
+
       }
 
       #opacity-range{

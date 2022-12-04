@@ -1,4 +1,4 @@
-import { renderText,renderRectWithOpacity } from './singleElements';
+import { renderText,renderRectWithOpacity, renderTextWithBg,renderWhiteSmallText } from './singleElements';
 import { clearPreset, rearrangeStage } from './controlls';
 
 export function createPreset1(stage) {
@@ -15,12 +15,19 @@ export function createPreset1(stage) {
     draggable: true,
   });
 
+  const transformer = new Konva.Transformer({
+    nodes: [box],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+  bgLayer.add(transformer);
+
   bgLayer.add(box);
   stage.add(bgLayer);
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer,475,200);
+  renderText(textLayer,475,200,stage.inverse);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -39,11 +46,17 @@ export function createPreset2(stage) {
     fill: stage.theme,
     draggable: true,
   });
+  const transformer = new Konva.Transformer({
+    nodes: [circle],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+  bgLayer.add(transformer);
   bgLayer.add(circle);
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer,475,200);
+  renderText(textLayer,475,200,stage.inverse);
   stage.add(textLayer);
 
   rearrangeStage(stage);
@@ -63,11 +76,17 @@ export function createPreset3(stage) {
     fill: stage.theme,
     draggable: true,
   });
+  const transformer = new Konva.Transformer({
+    nodes: [box],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+  bgLayer.add(transformer);
   bgLayer.add(box);
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer,500,200);
+  renderText(textLayer,500,200,stage.inverse);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -86,11 +105,18 @@ export function createPreset4(stage) {
     fill: stage.theme,
     draggable: true,
   });
+
+  const transformer = new Konva.Transformer({
+    nodes: [box],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+  bgLayer.add(transformer);
   bgLayer.add(box);
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer,475,200);
+  renderText(textLayer,475,200,stage.inverse);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -109,11 +135,17 @@ export function createPreset5(stage) {
     fill: stage.theme,
     draggable: true,
   });
+  const transformer = new Konva.Transformer({
+    nodes: [box],
+    keepRatio: true,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+  bgLayer.add(transformer);
   bgLayer.add(box);
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer,475,200);
+  renderText(textLayer,475,200,stage.inverse);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -122,19 +154,54 @@ export function createPreset5(stage) {
 export function createPreset6(stage) {
   clearPreset(stage);
   
-  const bgLayer = new Konva.Layer({
-    name: 'bgLayer',
-  });
-  stage.add(bgLayer);
-  renderRectWithOpacity(bgLayer,stage.theme,400,300)
-  
+
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
+  renderRectWithOpacity(textLayer,stage.theme,400,300)
+  renderTextWithBg(textLayer,stage.theme,300,50,stage.inverse);
+  stage.add(textLayer);
+  rearrangeStage(stage);
+}
 
+export function createPreset7(stage) {
+  clearPreset(stage);
+  
 
+  const textLayer = new Konva.Layer({
+    name: 'textLayer',
+  });
+  renderRectWithOpacity(textLayer,stage.theme,400,300)
+  renderTextWithBg(textLayer,stage.theme,300,50,stage.inverse);
+  renderWhiteSmallText(textLayer,450,100);
+  stage.add(textLayer);
+  rearrangeStage(stage);
+}
 
-  renderText(textLayer,405,305);
+export function createPreset8(stage) {
+  clearPreset(stage);
+  
+
+  const textLayer = new Konva.Layer({
+    name: 'textLayer',
+  });
+  renderTextWithBg(textLayer,stage.theme,300,50,stage.inverse);
+  renderTextWithBg(textLayer,stage.theme,300,120,stage.inverse);
+  renderRectWithOpacity(textLayer,stage.theme,400,300)
+  stage.add(textLayer);
+  rearrangeStage(stage);
+}
+
+export function createPreset9(stage) {
+  clearPreset(stage);
+  
+
+  const textLayer = new Konva.Layer({
+    name: 'textLayer',
+  });
+  renderRectWithOpacity(textLayer,stage.theme,400,300,stage.inverse)
+  renderTextWithBg(textLayer,stage.theme,300,50);
+  renderText(textLayer,300,120,stage.inverse);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
