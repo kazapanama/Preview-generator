@@ -1,4 +1,4 @@
-// import './styles.scss'
+
 import Konva from 'konva';
 import {
   createPreset1,
@@ -6,6 +6,7 @@ import {
   createPreset3,
   createPreset4,
   createPreset5,
+  createPreset6,
 } from './presets';
 import {
   setupStage,
@@ -18,6 +19,7 @@ import {
   saveAsPng,
   clearFullStage,
   recolorElements,
+  resizeElements,
 } from './controlls';
 
 Konva.hitOnDragEnabled = true;
@@ -25,9 +27,9 @@ const stage = setupStage();
 
 const themeColors = {
   blue: '#46A8EF',
-  red: '#f01818',
-  green: '#18f03e',
-  yellow: '#e6a100',
+  red: '#780707',
+  green: '#02ad21',
+  yellow: '#feb920',
 };
 
 stage.theme = themeColors.blue;
@@ -50,6 +52,13 @@ document
 document
   .querySelector('[data-preset="5"]')
   .addEventListener('click', () => createPreset5(stage));
+// document
+//   .querySelector('[data-preset="6"]')
+//   .addEventListener('click', () => createPreset6(stage));
+
+
+
+
 
 document.querySelector('input[type=file]').addEventListener('change', (e) => {
   renderImage(e, stage);
@@ -60,7 +69,7 @@ document.querySelector('.addText').addEventListener('click', () => {
     name: 'customText',
   });
   stage.add(textLayer);
-  renderText(textLayer, stage);
+  renderText(textLayer,);
 });
 
 document.querySelector('.addTextWithBg').addEventListener('click', () => {
@@ -68,7 +77,7 @@ document.querySelector('.addTextWithBg').addEventListener('click', () => {
     name: 'customText',
   });
   stage.add(textLayer);
-  renderTextWithBg(textLayer, stage);
+  renderTextWithBg(textLayer, stage.theme);
 });
 
 document
@@ -98,6 +107,13 @@ document.querySelector('.theme-yellow').addEventListener('click', () => {
 document
   .querySelector('.reset')
   .addEventListener('click', () => clearFullStage(stage));
+
+
+
+
+const opacity = document.querySelector('#opacity-range');
+opacity.addEventListener('input', () => resizeElements(stage,opacity.valueAsNumber));
+
 
 // initial render and deleting to fix font bug
 createPreset1(stage);

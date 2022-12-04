@@ -1,4 +1,4 @@
-import { renderText } from './singleElements';
+import { renderText,renderRectWithOpacity } from './singleElements';
 import { clearPreset, rearrangeStage } from './controlls';
 
 export function createPreset1(stage) {
@@ -20,7 +20,7 @@ export function createPreset1(stage) {
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer, stage);
+  renderText(textLayer,475,200);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -43,7 +43,7 @@ export function createPreset2(stage) {
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer, stage);
+  renderText(textLayer,475,200);
   stage.add(textLayer);
 
   rearrangeStage(stage);
@@ -67,7 +67,7 @@ export function createPreset3(stage) {
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer, stage);
+  renderText(textLayer,500,200);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -90,7 +90,7 @@ export function createPreset4(stage) {
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer, stage);
+  renderText(textLayer,475,200);
   stage.add(textLayer);
   rearrangeStage(stage);
 }
@@ -113,7 +113,28 @@ export function createPreset5(stage) {
   const textLayer = new Konva.Layer({
     name: 'textLayer',
   });
-  renderText(textLayer, stage);
+  renderText(textLayer,475,200);
+  stage.add(textLayer);
+  rearrangeStage(stage);
+}
+
+
+export function createPreset6(stage) {
+  clearPreset(stage);
+  
+  const bgLayer = new Konva.Layer({
+    name: 'bgLayer',
+  });
+  stage.add(bgLayer);
+  renderRectWithOpacity(bgLayer,stage.theme,400,300)
+  
+  const textLayer = new Konva.Layer({
+    name: 'textLayer',
+  });
+
+
+
+  renderText(textLayer,405,305);
   stage.add(textLayer);
   rearrangeStage(stage);
 }

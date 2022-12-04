@@ -95,14 +95,18 @@ export function renderImage(e, stage) {
   };
 }
 
-export function renderText(layer) {
+export function renderText(layer,x=270,y=200) {
   const textNode = new Konva.Text({
-    x: 475,
-    y: 200,
+    x,
+    y,
     text: 'Sample text',
     fontSize: 46,
     fontFamily: 'RussoOne',
     fill: '#FFF',
+    shadowOffset: {x: 5, y: 5},
+    shadowColor: '#292929',
+    shadowBlur: 5,
+    shadowOpacity: 0.25,
     align: 'center',
     draggable: true,
     edit: true,
@@ -142,15 +146,19 @@ export function renderText(layer) {
   });
 }
 
-export function renderTextWithBg(layer, stage) {
+export function renderTextWithBg(layer, color,x=270,y=200) {
   const textNode = new Konva.Text({
-    x: 475,
-    y: 200,
+    x,
+    y,
     text: 'Sample text',
     fontSize: 46,
     fontFamily: 'RussoOne',
     fill: '#FFF',
     align: 'center',
+    shadowOffset: {x: 5, y: 5},
+    shadowColor: '#292929',
+    shadowBlur: 5,
+    shadowOpacity: 0.25,
     draggable: true,
     edit: true,
   });
@@ -160,7 +168,8 @@ export function renderTextWithBg(layer, stage) {
     y: textNode.y() - 5,
     width: textNode.width() + 5,
     height: textNode.height() + 5,
-    fill: stage.theme,
+    cornerRadius:5,
+    fill: color,
     listening: true,
   });
 
@@ -202,4 +211,42 @@ export function renderTextWithBg(layer, stage) {
       textarea.remove();
     });
   });
+}
+
+export function renderRectWithOpacity(layer,color,x,y){
+  const rect = new Konva.Rect({
+    x,
+    y,
+    width: 400,
+    height: 100,
+    fill: '#000',
+    opacity: 0.5,
+    draggable: true,
+  });
+
+  const tip = new Konva.Rect({
+    x:rect.x() - 10,
+    y:rect.y(),
+    width: 10,
+    height: 100,
+    fill: color,
+    draggable: true,
+  });
+
+
+  const group = new Konva.Group({
+    draggable: true,
+  });
+
+  group.add(rect);
+  group.add(tip);
+
+  const Transformer = new Konva.Transformer({
+    nodes: [group],
+    keepRatio: false,
+    enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+  });
+
+  layer.add(Transformer);
+  layer.add(group);
 }

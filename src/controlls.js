@@ -90,3 +90,18 @@ export function recolorElements(stage) {
     .forEach((path) => (path.style.stroke = color));
   document.querySelector('.controll-input').style.borderColor = color;
 }
+
+export function resizeElements(stage,value){
+  const changeElems = [
+    ...stage.find('Rect'),
+    ...stage.find('Circle'),
+    ...stage.find('Path'),
+  ];
+
+
+  for (let layer of changeElems){
+    layer.opacity(value*0.01)
+
+  }
+
+}

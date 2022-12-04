@@ -99,13 +99,17 @@ body {
   background-color: #46a8ef;
 }
 .wrapper #editor .editor-controll .themes .theme-red {
-  background-color: #f01818;
+  background-color: #780707;
 }
 .wrapper #editor .editor-controll .themes .theme-green {
-  background-color: #18f03e;
+  background-color: #02ad21;
 }
 .wrapper #editor .editor-controll .themes .theme-yellow {
-  background-color: #e6a100;
+  background-color: #feb920;
+}
+.wrapper #editor .editor-controll #opacity-range {
+  width: 80%;
+  color: #408fc7;
 }
 .wrapper #editor .editor-controll .editor-text {
   width: 100%;
