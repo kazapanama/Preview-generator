@@ -236,9 +236,9 @@ export function renderRectWithOpacity(layer,color,x,y,inverse=false) {
   
   const box = new Konva.Rect({
     name:'dontRecolor',
-    x:x-5,
+    x:x-10,
     y:y-5,
-    width: textNode.width() + 10,
+    width: textNode.width() + 20,
     height: textNode.height() + 5,
     fill: '#000',
     opacity: 0.55,
@@ -247,11 +247,10 @@ export function renderRectWithOpacity(layer,color,x,y,inverse=false) {
   });
 
   const tip = new Konva.Rect({
-    x:box.x() - 10,
+    x:box.x() - 5,
     y:box.y(),
     width: 10,
     height: box.height(),
-    cornerRadius:5,
     fill: color,
     draggable: false,
   });
@@ -285,7 +284,7 @@ export function renderRectWithOpacity(layer,color,x,y,inverse=false) {
 
     textarea.addEventListener('input', (e) => {
       textNode.text(e.target.value);
-      box.width(textNode.width() + 10);
+      box.width(textNode.width() + 15);
       box.height(textNode.height() + 10);
       tip.height(box.height())
     });

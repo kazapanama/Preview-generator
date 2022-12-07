@@ -19,7 +19,7 @@ import {
 } from './singleElements';
 import {
   fitStageIntoParentContainer,
-  saveAsPng,
+  saveAsJPG,
   clearFullStage,
   recolorElements,
   recolorText,
@@ -119,7 +119,7 @@ document.querySelector('.addBlackTextWithBg').addEventListener('click', () => {
 
 document
   .querySelector('.save')
-  .addEventListener('click', () => saveAsPng(stage));
+  .addEventListener('click', () => saveAsJPG(stage));
 
 document.querySelector('.theme-blue').addEventListener('click', () => {
   

@@ -12,7 +12,7 @@ export function fitStageIntoParentContainer(stage) {
   }
 }
 
-export function saveAsPng(stage) {
+export function saveAsJPG(stage) {
   const transformers = stage.find('Transformer');
 
   for (const transformer of transformers) {
@@ -31,7 +31,7 @@ export function saveAsPng(stage) {
   }
 
   const link = document.createElement('a');
-  link.download = `${Date.now()}.png`;
+  link.download = `${Date.now()}.jpg`;
   link.href = dataURL;
   document.body.appendChild(link);
   link.click();
