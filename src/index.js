@@ -26,6 +26,24 @@ import {
   setElementsOpacity,
 } from './controlls';
 
+
+// Check if the service worker API is supported.
+if ('serviceWorker' in navigator) {
+  // Register the service worker.
+  navigator.serviceWorker.register('/service-worker.js').then(registration => {
+    // The service worker has been registered successfully.
+    console.log('Service worker registration successful:', registration);
+  }).catch(error => {
+    // There was an error registering the service worker.
+    console.error('Error registering service worker:', error);
+  });
+}
+
+
+
+
+
+
 Konva.hitOnDragEnabled = true;
 const stage = setupStage();
 
